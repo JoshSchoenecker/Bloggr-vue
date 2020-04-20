@@ -16,7 +16,6 @@
 </template>
 
 <script>
-
 import Blog from "../components/Blog.vue"
 import CreateBlog from "../components/CreateBlog.vue"
 

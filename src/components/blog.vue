@@ -1,5 +1,5 @@
 <template>
-  <div class="card col-4 m-5 shadow Blog">
+  <div class="card col-4 m-5 shadow Blog" @click="selectBlog()">
     <div class="card-body text-center">
       <div class="card-title border-bottom text-center font-weight-bolder">
         <p>{{blogData.title}}</p>
@@ -8,7 +8,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -19,8 +18,12 @@ export default {
   },
   computed: {},
   methods: {
-    getBlogs() {
-      this.$store.commit("blogs", {});
+    selectBlog() {
+      this.$store.commit("setActiveBlog", {})
+      this.$router.push({
+        name:"BlogDets",
+        params: {blogId: this.blogData._id}
+      })
     }
   },
   components: {}

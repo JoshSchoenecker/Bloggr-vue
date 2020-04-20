@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     profile: {},
     blogs: {},
+    activeBlog: {},
   },
   mutations: {
     setProfile(state, profile) {
@@ -16,26 +17,35 @@ export default new Vuex.Store({
     },
     setBlogs(state, blogs) {
       state.blogs = blogs;
-    }
-    
+    },
+    setActiveBlog(state, blog) {
+      state.activeBlog = blog
+    },
   },
   actions: {
     setBearer({}, bearer) 
     {
       api.defaults.headers.authorization = bearer;
     },
-
     resetBearer() 
     {
       api.defaults.headers.authorization = "";
     },
-
     async getProfile({ commit }) {
       try {
         let res = await api.get("profile");
         commit("setProfile", res.data);
       } catch (error) {
         console.error(error, "getProfile failing");
+      }
+    },
+    async getBlog({commit, dispatch}, blogId){
+      try {
+        let res = await api.get(`blogs/${blogId}`)
+        console.log("activeBlog", res.data);
+        commit('setActiveBlog', res.data)
+      } catch (error) {
+        console.error(error, 'failed to getBlog');
       }
     },
 
@@ -58,7 +68,16 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error, "addBlog failing");
       }
-    }
+    },
 
+    
+    async deleteBlog({commit, dispatch}, blogId){
+      try {
+        await api.delete(`blogs/${blogId}`)
+        dispatch('getBlogs')
+      } catch (error) {
+        console.error(error, "deleteBlog Failed");
+      }
+    },
   },
 });
