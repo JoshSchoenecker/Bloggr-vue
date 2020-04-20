@@ -1,12 +1,12 @@
 <template>
     <div class="comment container-fluid">
-<div class="row mt-3">
+    <div class="row mt-3">
         <div class="col-10 text-center m-auto">
             <div class="card card-body">
                 <h5>{{comment.body}}</h5>
                 <p>- {{comment.creator.name}}</p>
-                <Create-Comment/>
-                <button class="btn btn-danger" @click="deleteComment()">Delete</button>
+                <hr>
+            <button v-if="$auth.userInfo.email == comment.creator.email" class="btn btn-danger" @click="deleteComment()">Delete</button>
             </div>
         </div>
     </div>
@@ -24,12 +24,16 @@ export default {
         return {}
     },
     computed:{
-    
+    blog() {
+        return this.$store.state.activeBlog.blog
+    },
+    comments(){
+        return this.$store.state.activeBlog.comments
+    }
     },
     methods:{
         deleteComment() {
             this.$store.dispatch("deleteComment", this.comment)
-            this.$router.push({name: "BlogDetails"})
         },
     },
     mounted() {

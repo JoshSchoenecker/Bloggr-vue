@@ -2,7 +2,7 @@
     <div class="Blog-Details container-fluid">
     <div class="row">
 
-    <div class="col-8 text-center m-auto">
+    <div v-if="blogDetails.blog" class="col-8  text-center m-auto">
         <div class="card mt-5 ">
         <div class="card-body">
         <div class="card-title">
@@ -12,7 +12,8 @@
             <h5>{{blogDetails.blog.body}}</h5>
             <p>- {{blogDetails.blog.creator.name}}</p>
             <hr>
-            <button class="btn btn-danger" @click="deleteBlog()">Delete</button>
+            <create-comment v-if="$auth.isAuthenticated"></create-comment>
+            <button v-if="$auth.userInfo.email == blogDetails.blog.creator.email" class="btn btn-danger" @click="deleteBlog()">Delete</button>
         </div>
         </div>
     </div>
@@ -29,6 +30,7 @@
 
 
 <script>
+import CreateComment from "../components/CreateComment"
 import comment from "../components/Comment.vue"
 export default {
     name: 'Blog-Details',
@@ -53,7 +55,7 @@ export default {
             this.$router.push({name: "Home"})
         },
     },
-    components:{ comment }
+    components:{ comment, CreateComment }
 }
 </script>
 
