@@ -11,6 +11,7 @@
         <hr>
             <h5>{{blogDetails.blog.body}}</h5>
             <p>- {{blogDetails.blog.creator.name}}</p>
+            <hr>
             <button class="btn btn-danger" @click="deleteBlog()">Delete</button>
         </div>
         </div>
@@ -50,7 +51,7 @@ export default {
         deleteBlog() {
             this.$store.dispatch("deleteBlog", this.$route.params.blogId)
             this.$router.push({name: "Home"})
-        }
+        },
     },
     components:{ comment }
 }

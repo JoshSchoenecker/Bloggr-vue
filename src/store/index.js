@@ -39,7 +39,7 @@ export default new Vuex.Store({
         console.error(error, "getProfile failing");
       }
     },
-    async getBlog({commit, dispatch}, blogId){
+    async getBlog({commit}, blogId){
       try {
         let res = await api.get(`blogs/${blogId}`)
         console.log("activeBlog", res.data);
@@ -49,7 +49,7 @@ export default new Vuex.Store({
       }
     },
 
-    async getBlogs({commit, dispatch}) 
+    async getBlogs({commit}) 
     {
       try {
         let res = await api.get('blogs')
@@ -60,7 +60,7 @@ export default new Vuex.Store({
       }
     },
 
-    async addBlog({commit, dispatch}, newBlog)
+    async addBlog({dispatch}, newBlog)
     {
       try {
         let res = await api.post("blogs", newBlog)
@@ -70,8 +70,7 @@ export default new Vuex.Store({
       }
     },
 
-    
-    async deleteBlog({commit, dispatch}, blogId){
+    async deleteBlog({dispatch}, blogId){
       try {
         await api.delete(`blogs/${blogId}`)
         dispatch('getBlogs')
@@ -79,5 +78,23 @@ export default new Vuex.Store({
         console.error(error, "deleteBlog Failed");
       }
     },
+    async addComment({dispatch}, newComment){
+      try {
+        let res = await api.post("comments", newComment)
+        dispatch('getBlogs', newComment.blogId)
+      } catch (error) {
+         console.error(error, "addComment failing");
+                        
+      }
+    },
+    async deleteComment({dispatch}, commentId){
+      try {
+        let res = await api.delete('comments/' + commentId.id)
+      } catch (error) {
+        console.error(error, "deleteComment failed");
+        
+      }
+    }
+    
   },
 });
