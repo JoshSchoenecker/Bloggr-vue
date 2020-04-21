@@ -22,10 +22,10 @@ const routes = [
   },
   {
     path: "/blog/:blogId",
-    name: "BlogDets",
+    name: "BlogDetails",
     // @ts-ignore
-    component: () => import (/*webpackChunkName: "Blog-Details" */ '../pages/BlogDetails.vue'),
-    beforeEnter: authGuard,
+    component: () => import (/*webpackChunkName: "BlogPage" */ '../pages/BlogDetails.vue'),
+    // beforeEnter: authGuard,
   },
   {
     path: "*",

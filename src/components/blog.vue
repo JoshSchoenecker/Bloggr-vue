@@ -21,7 +21,7 @@ export default {
     selectBlog() {
       this.$store.commit("setActiveBlog", {})
       this.$router.push({
-        name:"BlogDets",
+        name:"BlogDetails",
         params: {blogId: this.blogData._id}
       })
     }
