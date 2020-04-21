@@ -2,12 +2,23 @@
     <div class="comment container-fluid">
     <div class="row mt-3">
         <div class="col-10 text-center m-auto">
-            <div class="card card-body">
+            <div v-if="editing" class="card card-body">
                 <h5>{{comment.body}}</h5>
                 <p>- {{comment.creator.name}}</p>
                 <hr>
+
+                     <button v-if="$auth.userInfo.email == comment.creator.email" class="btn btn-warning" @click="editing = !editing">Edit</button>
+
             <button v-if="$auth.userInfo.email == comment.creator.email" class="btn btn-danger" @click="deleteComment()">Delete</button>
             </div>
+            <form v-else @submit.prevent="editComment">
+                <input type="text" v-model="comment.body"/>
+                <button 
+                type="button"
+                v-if="$auth.userInfo.email == comment.creator.email"
+                @click="editing = !editing"
+                >Submit</button>
+            </form>
         </div>
     </div>
     </div>
@@ -15,13 +26,14 @@
 
 
 <script>
-// TODO left off here do i need a import? create comment not working 
-import CreateComment from "./CreateComment.vue"
+
 export default {
     name: 'comment',
     props: ['comment'],
     data(){
-        return {}
+        return {
+            editing: true,
+        }
     },
     computed:{
     blog() {
@@ -35,6 +47,11 @@ export default {
         deleteComment() {
             this.$store.dispatch("deleteComment", this.comment)
         },
+        editComment(){
+            debugger
+			this.$store.dispatch('editComment', this.comment)
+			this.editing = true
+        }
     },
     mounted() {
         this.$store.dispatch("getBlog", this.$route.params.blogId)

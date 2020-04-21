@@ -78,6 +78,18 @@ export default new Vuex.Store({
         console.error(error, "deleteBlog Failed");
       }
     },
+
+    async editBlog({commit, dispatch}, blog){
+      try {
+        debugger
+        let res = await api.put('blogs/' + blog._id, blog)
+        dispatch('getBlogs', blog._id)
+      } catch (error) {
+        console.error(error, "editBlog failing");
+        
+      }
+    },
+
     async addComment({dispatch}, newComment){
       try {
         let res = await api.post("comments", newComment)
@@ -91,6 +103,17 @@ export default new Vuex.Store({
         let res = await api.delete('comments/' + comment.id)
       } catch (error) {
         console.error(error, "deleteComment failed");
+        
+      }
+    },
+    async editComment({commit, dispatch}, comment){
+      try {
+        debugger
+        let res = await api.put('comments/' + comment._id, comment)
+        commit('setBlogs', res.data)
+        dispatch('getBlogs', comment.blogId)
+      } catch (error) {
+        console.error(error, "editComment failing");
         
       }
     }
