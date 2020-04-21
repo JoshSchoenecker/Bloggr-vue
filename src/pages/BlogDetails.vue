@@ -78,7 +78,7 @@ export default {
     },
     editBlog() {
         debugger
-      this.$store.dispatch("editBlog", this.activeBlog.blog);
+      this.$store.dispatch("editBlog", this.blogDetails.blog);
       this.editing = false;
     }
   },
