@@ -98,6 +98,7 @@ export default new Vuex.Store({
     async deleteComment({ dispatch }, comment) {
       try {
         let res = await api.delete("comments/" + comment.id);
+        dispatch('getBlog', comment.blogId)
       } catch (error) {
         console.error(error, "deleteComment failed");
       }
