@@ -10,6 +10,7 @@ export default new Vuex.Store({
     profile: {},
     blogs: {},
     activeBlog: {},
+    userComments: {},
   },
   mutations: {
     setProfile(state, profile) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     setActiveBlog(state, blog) {
       state.activeBlog = blog;
     },
+    setUserComments(state, blogs){
+      state.userComments = blogs
+    }
   },
   actions: {
     setBearer({}, bearer) {
@@ -113,5 +117,20 @@ export default new Vuex.Store({
         console.error(error, "editComment failing");
       }
     },
+    async getUserComments({commit, dispatch}) {
+      try {
+        let res = await api.get('profile/blogs/')
+        commit('setUserComments', res.data)
+      } catch (error) {
+        console.error(error, "getUserComments failing");
+      }
+    },
+    getUserBlogs({commit, dispatch}) {
+      try {
+        
+      } catch (error) {
+        
+      }
+    }
   },
 });
