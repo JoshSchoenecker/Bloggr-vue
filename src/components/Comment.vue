@@ -1,7 +1,5 @@
 <template>
-  <div class="comment container-fluid">
-    <div class="row mt-3">
-      <div class="col-10 text-center m-auto">
+      <div class="comment container-fluid col-10 text-center m-auto">
         <div v-if="editing" class="card card-body">
             <div class="row justify-content-end">
           <button
@@ -12,9 +10,14 @@
             <span>&times;</span>
           </button>
             </div>
-
+            <!-- TODO ask D$ about Scss  -->
+          <div class="col-1 border border-black pt-2 shadow">
+          <img class="img-thumbnail" :src="comment.creator.picture" alt="" />
+          <p>{{comment.creator.name}}</p>
+          </div>
+          <div class="col-10 text-center">
           <h5>{{comment.body}}</h5>
-          <p>- {{comment.creator.name}}</p>
+          </div>
           <hr />
 
           <button
@@ -32,8 +35,6 @@
           >Submit</button>
         </form>
       </div>
-    </div>
-  </div>
 </template>
 
 
@@ -73,5 +74,6 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
+
 </style>

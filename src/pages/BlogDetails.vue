@@ -48,12 +48,12 @@
         <h3>Write a comment!</h3>
       <CreateComment />
       </div>
-      <div class="text-center mt-3 col-12">
-      <h1 class="border-bottom">Comments</h1>
+      <div class="col-8 text-center mt-5 mb-4 bg-light py-2 mx-auto rounded">
+      <h1 class="border-bottom shadow">Comments</h1>
+      </div>
       <Comment v-for="comment in comments" :comment="comment" :key="comment._id"/>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
