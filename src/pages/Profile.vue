@@ -5,16 +5,23 @@
     <p>{{ profile.email }}</p>
     <hr><hr>
 		<!-- TODO now getting more 400 errors, ask D$ about repeated 400 from getBlog -->
+		<!-- TODO attach comments to user blog post -->
 		<div class="row m-auto">
-			<div class="col-10 m-auto">
+			<div class="col-12">
 
+			<h1>Your Blog Posts</h1>
 		<Blog v-for="blog in userBlogs" :blogData="blog" :key="blog.id" />
 		<hr>
 			</div>
+			
 		<!-- userser comments -->
 		<!-- NOTE you can not use a v-for and a v-if in the same tag, use a wrapper element-->
-		<!-- TODO delete and edit functionality -->
+		<!-- TODO fix delete and edit functionality -->
+		<!-- TODO attach parent blog post to user comment -->
+		<div class="col-12 mt-5">
+			<h1>Your Comments</h1>
     <comment v-for="comment in userComments" :comment="comment" :key="comment.id" />
+		</div>
 		</div>
   </div>
 </template>
