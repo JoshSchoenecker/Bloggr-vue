@@ -48,12 +48,7 @@ export default {
     };
   },
   computed: {
-    blog() {
-      return this.$store.state.activeBlog.blog;
-    },
-    comments() {
-      return this.$store.state.activeBlog.comments;
-    }
+    
   },
   methods: {
     deleteComment() {
